@@ -20,7 +20,7 @@ class BankAccount
         this->address=address;
         this->age=age;
         this->password=password;
-        this->account_number=rand()%1000000000;
+        this->account_number=rand()%100000000;
         this->balance=0;
         cout<<"Your account no is: "<<this->account_number<<endl;
     }
@@ -30,6 +30,17 @@ class BankAccount
         }else{
             return -1;
         }
+    }
+    void add_money(string password,int amount){
+               if(this->password==password)
+
+               {
+                 this->balance +=amount;
+                 cout<<"Add money successful"<<endl;
+               }
+               else{
+                  cout<<"password didn't match"<<endl;
+               }
     }
 
 };
@@ -43,15 +54,22 @@ BankAccount* create_account()
     BankAccount *myAccount =new BankAccount(account_holder,address,age,password);
     return myAccount;
 }
+
+void add_money(BankAccount *myAccount){
+      string password;
+      int amount;
+      cout<<"ADD MONEY"<<endl;
+      cin>>password>>amount;
+      myAccount->add_money(password,amount);
+      cout<<"Your bank balance is "<<myAccount->show_balance("xyz")<<endl;
+}
 int main()
 {
 
     create_account();
       BankAccount *myAccount =create_account();
-      if(myAccount->show_balance("xyz") ==-1){
-        cout<<"password didn't match"<<endl;
-      }else{
+      add_money(myAccount);
         cout<<"Your bank balance is "<<myAccount->show_balance("xyz")<<endl;
-      }
+      
     return 0;
 }
