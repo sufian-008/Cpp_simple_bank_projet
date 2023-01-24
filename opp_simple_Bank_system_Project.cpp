@@ -53,10 +53,13 @@ class BankAccount
         cout<<"Password didn't match"<<endl;
     }
 }
-
+     friend  class MyCash;
 };
 
-class MyCash
+
+ 
+
+class MyCash 
 {
    protected:
       int balance;
@@ -109,6 +112,8 @@ void add_money_from_bank(MyCash *myCash, BankAccount *myAccount)
     cout<<"Add  Money From Bank"<<endl;
     cin>>password>>amount;
   myCash->add_money_from_bank(myAccount,password,amount);
+  cout<<"Your Bank balance is"<<myAccount->show_balance("xyz")<<endl;
+
 }
 int main()
 {
