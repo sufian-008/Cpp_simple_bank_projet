@@ -81,8 +81,16 @@ BankAccount* create_account()
 {
     string account_holder,password,address;
     int age;
-    cout<<"CREATE ACCOUNT"<<endl;
-    cin>>account_holder>>address>>age>>password;
+    cout<<"FIRST CREATE ACCOUNT"<<endl;
+    cout<<"Name: ";
+    cin>>account_holder;
+    cout<<"Adress: ";
+    cin>>address;
+    cout<<"Age: ";
+    cin>>age;
+    cout<<"Password: ";
+    cin>>password;
+ 
     BankAccount *myAccount =new BankAccount(account_holder,address,age,password);
     return myAccount;
 }
@@ -91,6 +99,7 @@ void add_money(BankAccount *myAccount){
       string password;
       int amount;
       cout<<"ADD MONEY"<<endl;
+       cout<<"Give first Password then Number of Amount: ";
       cin>>password>>amount;
       myAccount->add_money(password,amount);
       cout<<"Your bank balance is "<<myAccount->show_balance("xyz")<<endl;
@@ -101,6 +110,7 @@ void deposit_money(BankAccount *myAccount)
     string password;
     int amount;
     cout<<"Deposite Money"<<endl;
+     cout<<"Give first Password then Number of Amount: ";
     cin>>password>>amount;
     myAccount->add_money(password,amount);
     cout<<"Your bank balance is "<<myAccount->show_balance("abc")<<endl;
@@ -110,6 +120,7 @@ void add_money_from_bank(MyCash *myCash, BankAccount *myAccount)
     string password;
     int amount;
     cout<<"Add  Money From Bank"<<endl;
+    cout<<"Give first Password then Number of Amount: ";
     cin>>password>>amount;
   myCash->add_money_from_bank(myAccount,password,amount);
   cout<<"Your Bank balance is"<<myAccount->show_balance("xyz")<<endl;
@@ -118,12 +129,31 @@ void add_money_from_bank(MyCash *myCash, BankAccount *myAccount)
 int main()
 {
 
-    create_account();
-      BankAccount *myAccount =create_account();
-      add_money(myAccount);
-       deposit_money(myAccount);
-     MyCash *myCash = new MyCash();
-     add_money_from_bank(myCash,myAccount);
+   BankAccount *myAccount = create_account();
+   MyCash *myCash =new MyCash();
+   while(true)
+   {
+     cout<<"Select option: "<<endl;
+     cout<<"1. Add Money to Bank "<<endl;
+     cout<<"2. Deposit Money from Bank"<<endl;
+     cout<<"3. Add Money to MyCash from Bank"<<endl;
+     int option;
+     cout<<"Please Select Your Option: ";
+     cin>>option;
+     if(option == 1)
+     {
+        add_money(myAccount);
+     }
+     else if(option ==2){
+        deposit_money(myAccount);
+     }
+     else if(option== 3){
+        add_money_from_bank(myCash,myAccount);
+     }
+     else{
+        cout<<"Invalid option"<<endl;
+     }
+   }
       
     return 0;
 }
